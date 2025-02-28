@@ -1,12 +1,14 @@
- ; Chapter Two Number One
- ;Create a relational database in Prolog. Represent the data tuples as facts
- ;and the constraints on the data tuples as rules.
- ; we can represent these as the data tuples
+ ; Chapter Two Solutions
+ ;Create a relational database 
 
-(Mentor Nahom Benny) ; this is defining the tuples as facts
-(Mentor Leah Kal)
-(Mentor Betty Aron)
+
+; defining the tuples as facts
+(Study Mati CS) 
+(Study Mel SE)
+(Study Hermi SE)
+
 
 
  ; constraints as rules
-(= (get-Mentor $intern) (match &self (Mentor $mentor $intern) $mentor))
+(= (get-Student $field) (match &self (Study $student $field) $student))
+!(get-Student SE)
