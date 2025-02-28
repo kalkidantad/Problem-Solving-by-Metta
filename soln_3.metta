@@ -1,23 +1,24 @@
- ;Design a Prolog program unique(Bag, Set) that takes a bag (a list
+ ;Design a program unique(Bag, Set) that takes a bag (a list
  ;that may contain duplicate elements) and returns a set (no elements are
  ;repeated)
- ; this is the member checker function
-(: isMember (-> $t (List $t) Bool))
-(= (isMember $x ()) False)
-(= (isMember $x (:: $h $t))
-    (or (== $x $h) (isMember $x $t))
+ ; to check the membership of the element
+(: isMember (-> $l (List $l) Bool))
+(= (isMember $x Nil) False)
+(= (isMember $x (Cons $h $l))
+    (if (== $x $h) True (isMember $x $l))
 )
- ; defining uniqu function that it accepts a list and outputs a list
-(: uniqu (-> (List $t) (List $t)))
-
-(= (uniqu ()) ())
-(= (uniqu (:: $h $t))
-     ; if head is already in the unique list skip it
-    (if (isMember $h (uniqu $t))
-         ; recursivly calling the function and skipping head
-        (uniqu $t)
-         ; else add h to the unique list
-        (:: $h (uniqu $t))
+ ; defining unique function that it accepts a list and outputs a list
+(: uniqu (-> (List $l) (List $l)))
+ ; base case
+(= (uniqu Nil) Nil)
+ ; recursive case
+(= (uniqu (Cons $h $l))
+     ; if the head is the member of the tail skip the head and apply unique to the tail
+    (if (isMember $h (uniqu $l))
+        (uniqu $l)
+         ; otherwise add h to the unique list
+        (Cons $h (uniqu $l))
     ))
 
-! (uniqu (:: 1 (:: 2 (:: 1 (:: 3 ())))))
+! (uniqu (Cons 1 (Cons 2 (Cons 1 (Cons 3 Nil)))))
+; !(isMember 4 (Cons 1 (Cons 2 (Cons 1 (Cons 3 Nil)))))
