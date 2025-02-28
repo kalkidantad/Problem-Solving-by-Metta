@@ -5,7 +5,7 @@
  ;into its component elements.
 
  ; specfiying that is accepts an argument p and a list l and returns either True or False
-(: is_member (-> $p (List $l) Bool))
+(: is_member (-> $l (List $l) Bool))
 
  ; if empty return false
 (= (is_member $y Nil) False)
